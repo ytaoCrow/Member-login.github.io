@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>會員登入系統</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>會員註冊</h1>
+    <form>
+        <label>
+
+            帳號:
+            <input type="email" id="user_email" />
+
+        </label></br>
+
+        <label>
+
+            密碼:
+            <input type="password" id="user_password"/>
+            <br/><small style = "color: red;" id="password-warning"></small>
+
+        </label></br>
+       
+        <button id="submit-button" type="submit" disabled>送出</button>
+    </form>
+
+        <script>
+        var signIn = {
+            isEmailFormatCorrect:false,
+            isPasswordFormatCorrect:false,
+            init:function(){
+                var emailInput =  document.getElementById("user_email")
+                var passwordInput =  document.getElementById("user_password")
+
+            emailInput.addEventListener('input', function(e){
+                //console.log(e.target.value)
+                signIn.isEmailFormatCorrect = true
+                canSubmit()
+        })
+                passwordInput.addEventListener('input', function(e){
+                var value = e.target.value;
+                var warning = document.getElementById("password-warning")
+
+                     if(value.length >= 6){
+
+                    warning.innerHTML=""
+                    signIn.isPasswordFormatCorrect = true
+
+                    }else{
+
+                    warning.innerHTML="請輸入6位以上密碼"
+                    signIn.isPasswordFormatCorrect = false
+            }
+                canSubmit()
+        })
+
+                function canSubmit()
+        {
+                var submit = document.getElementById("submit-button")
+
+                    if(signIn.isPasswordFormatCorrect && signIn.isEmailFormatCorrect){
+
+                    submit.disabled = false
+
+                    }else{
+
+                submit.disabled = true
+
+                }
+            }
+        }
+    }
+
+        signIn.init();
+
+        </script>
+
+    </body>
+</html>
